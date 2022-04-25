@@ -51,6 +51,7 @@ public class InitCSV {
         }
 
         list.remove(0);
+        list.remove(0);
 
 
     }

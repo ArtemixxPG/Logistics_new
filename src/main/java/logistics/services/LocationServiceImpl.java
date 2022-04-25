@@ -1,6 +1,6 @@
 package logistics.services;
 
-import logistics.DAO.LocationsDAO;
+import logistics.DAO.main.LocationsDAO;
 import logistics.entityes.Customers;
 import logistics.entityes.DCsAndFactories;
 import logistics.entityes.Locations;

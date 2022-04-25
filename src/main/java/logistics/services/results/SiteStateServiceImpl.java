@@ -1,6 +1,6 @@
 package logistics.services.results;
 
-import logistics.DAO.result.SiteStateDAO;
+import logistics.DAO.result.all.SiteStateDAO;
 import logistics.entityes.SiteState;
 import org.springframework.stereotype.Service;
 

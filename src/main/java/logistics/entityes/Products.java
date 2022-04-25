@@ -1,5 +1,7 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,14 +18,20 @@ public class Products implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @CsvBindByName(column = "Name")
     private String name;
 
     @Column(name = "unit")
+    @CsvBindByName(column = "Unit")
     private String unit;
 
 
     @OneToOne(cascade = CascadeType.ALL)
     private HistoricalDemand historicalDemand;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Sale sale;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "products")
     private List<StorageByProduct> storageByProducts;

@@ -1,8 +1,8 @@
 package logistics.services;
 
-import logistics.DAO.CustomersDao;
-import logistics.DAO.HistoricalDemandDAO;
-import logistics.DAO.ProductDAO;
+import logistics.DAO.main.CustomersDao;
+import logistics.DAO.main.HistoricalDemandDAO;
+import logistics.DAO.main.ProductDAO;
 import logistics.entityes.Customers;
 import logistics.entityes.HistoricalDemand;
 import org.springframework.stereotype.Service;

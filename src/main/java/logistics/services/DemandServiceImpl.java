@@ -1,8 +1,8 @@
 package logistics.services;
 
 
-import logistics.DAO.DemandDAO;
-import logistics.DAO.HistoricalDemandDAO;
+import logistics.DAO.main.DemandDAO;
+import logistics.DAO.main.HistoricalDemandDAO;
 import logistics.entityes.Demand;
 import logistics.entityes.HistoricalDemand;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class DemandServiceImpl implements DemandService{
             demand.setCustomers(historicalDemand.getCustomers());
             demand.setProducts(historicalDemand.getProducts());
             demand.setRevenue(historicalDemand.getPrice());
-            demand.setCurency("RUB");
+            demand.setCurrency("RUB");
             demandDAO.save(demand);
 
         }
@@ -50,7 +50,7 @@ public class DemandServiceImpl implements DemandService{
                     .collect(Collectors.toList());
             for(Demand demand: newDemands){
                 Demand demand1 = demandDAO.getById(demand.getId());
-                demand1.setCurency(demand.getCurency());
+                demand1.setCurrency(demand.getCurrency());
                 demand1.setProducts(demand.getProducts());
                 demand1.setRevenue(demand.getRevenue());
                 demand1.setCustomers(demand.getCustomers());

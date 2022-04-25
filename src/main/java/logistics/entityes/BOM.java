@@ -1,5 +1,7 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +16,12 @@ public class BOM implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @CsvBindByName(column = "name")
     private String name;
+
+    @Transient
+    @CsvBindByName(column = "Product")
+    private String productName;
 
     @OneToOne
     @JoinColumn(name = "end_product", referencedColumnName = "name")

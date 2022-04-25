@@ -1,5 +1,7 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +14,20 @@ public class DemandForAllPeriod {
     private Long id;
 
     @Column(name = "count")
+    @CsvBindByName(column = "Count")
     private Integer count;
+
+    @Transient
+    @CsvBindByName(column = "Customers")
+    private String customerName;
+
+    @Transient
+    @CsvBindByName(column = "Period")
+    private String periodName;
+
+    @Transient
+    @CsvBindByName(column = "Product")
+    private String productName;
 
     @OneToOne
     @JoinColumn(name = "cust_name", referencedColumnName = "name")

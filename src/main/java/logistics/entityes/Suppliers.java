@@ -1,5 +1,8 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindAndSplitByName;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 import logistics.entityes.Locations;
 import logistics.entityes.Participant;
 
@@ -16,17 +19,25 @@ public class Suppliers extends Participant {
     private Long id;
 
     @Column(name = "name")
+    @CsvBindByName(column = "name", required = true)
     private String name;
 
     @Column(name = "type")
+    @CsvBindByName(column = "type", required = true)
     private String type;
 
 
     @Column(name = "inclusion_type")
+    @CsvBindByName(column = "inclusion_type", required = true)
     private String inclusion_type;
 
     @Column(name = "icon")
+    @CsvBindByName(column = "icon", required = true)
     private int icon;
+
+    @Transient
+    @CsvBindByName(column = "location", required = true)
+    private String locationsName;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location", referencedColumnName = "name")

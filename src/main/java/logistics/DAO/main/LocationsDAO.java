@@ -1,4 +1,4 @@
-package logistics.DAO;
+package logistics.DAO.main;
 
 import logistics.entityes.Locations;
 import org.springframework.data.jpa.repository.JpaRepository;

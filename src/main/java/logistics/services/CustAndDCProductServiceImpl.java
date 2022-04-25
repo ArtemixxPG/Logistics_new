@@ -1,9 +1,9 @@
 package logistics.services;
 
-import logistics.DAO.CustAndDCProductDAO;
-import logistics.DAO.CustomersDao;
-import logistics.DAO.DC_FactoriesDAO;
-import logistics.DAO.HistoricalProductionDAO;
+import logistics.DAO.main.CustAndDCProductDAO;
+import logistics.DAO.main.CustomersDao;
+import logistics.DAO.main.DC_FactoriesDAO;
+import logistics.DAO.main.HistoricalProductionDAO;
 import logistics.entityes.*;
 import logistics.entityes.Customers;
 import logistics.entityes.DCsAndFactories;

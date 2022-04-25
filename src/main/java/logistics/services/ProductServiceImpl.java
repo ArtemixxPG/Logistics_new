@@ -1,6 +1,6 @@
 package logistics.services;
 
-import logistics.DAO.ProductDAO;
+import logistics.DAO.main.ProductDAO;
 import logistics.entityes.Products;
 import org.springframework.stereotype.Service;
 

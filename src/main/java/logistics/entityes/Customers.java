@@ -1,5 +1,6 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
 import logistics.entityes.HistoricalDemand;
 import logistics.entityes.Icon;
 import logistics.entityes.Locations;
@@ -18,13 +19,29 @@ public class Customers implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @CsvBindByName(column = "name")
     private String name;
 
     @Column(name = "type")
+    @CsvBindByName(column = "type")
     private String type;
 
     @Column(name = "inclusion")
+    @CsvBindByName(column = "inclusion")
     private String inclusion;
+
+    @Transient
+    @CsvBindByName(column = "icon")
+    private String iconName;
+
+    @Transient
+    @CsvBindByName(column = "locations")
+    private String locationName;
+
+    @Transient
+    @CsvBindByName(column = "Historical Demand")
+    private String historicalDemandName;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "icon", referencedColumnName = "id")
@@ -34,12 +51,11 @@ public class Customers implements Serializable {
     @JoinColumn(name = "location", referencedColumnName = "name")
     private Locations locations;
 
-    @Transient
     @OneToOne(cascade = CascadeType.ALL)
     private HistoricalDemand historicalDemand;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "site_state")
-//    private List<SiteState> siteStates;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Sale sale;
 
     public Customers(){}
 

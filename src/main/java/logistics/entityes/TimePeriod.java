@@ -1,5 +1,8 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,20 +19,28 @@ public class TimePeriod implements Serializable {
 
     @Column(name = "name")
     @Temporal(TemporalType.TIMESTAMP)
+    @CsvBindByName(column = "Name", required = true)
+    @CsvDate("dd.MM.yyyy")
     private Date name;
 
     @Column(name = "start")
     @Temporal(TemporalType.TIMESTAMP)
+    @CsvBindByName(column = "Start", required = true)
+    @CsvDate("dd.MM.yyyy")
     private Date start;
 
     @Column(name = "ending")
     @Temporal(TemporalType.TIMESTAMP)
+    @CsvBindByName(column = "End", required = true)
+    @CsvDate("dd.MM.yyyy")
     private Date ending;
 
     @Column(name = "demand")
+    @CsvBindByName(column = "Demand")
     private Double demand;
 
     @Column(name = "coefficient")
+    @CsvBindByName(column = "Coefficient")
     private Double coefficient;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "timePeriod")
@@ -43,11 +54,6 @@ public class TimePeriod implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "timePeriod")
     private List<ProductionFlow> productionFlows;
-
-
-
-
-
 
 
     public TimePeriod(){}

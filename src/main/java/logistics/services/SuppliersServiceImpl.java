@@ -1,8 +1,8 @@
 package logistics.services;
 
 
-import logistics.DAO.LocationsDAO;
-import logistics.DAO.SuppliersDAO;
+import logistics.DAO.main.LocationsDAO;
+import logistics.DAO.main.SuppliersDAO;
 import logistics.entityes.Suppliers;
 import org.springframework.stereotype.Service;
 

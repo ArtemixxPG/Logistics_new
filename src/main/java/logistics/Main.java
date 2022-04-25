@@ -1,8 +1,12 @@
 package logistics;
 
+import logistics.entityes.HistoricSale;
+import logistics.initialization.InitTXT;
 import logistics.parsers.*;
 import logistics.services.CustAndDCProductService;
 import logistics.services.CustAndDCProductServiceImpl;
+import logistics.services.SaleService;
+import logistics.services.SaleServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,7 +20,7 @@ public class Main  {
 
 
 
-    public void printList(String f){
+    public void printList(String... f){
 
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConsoleConfig.class);
         LocationParser locationParser = applicationContext.getBean(LocationParser.class);
@@ -26,53 +30,18 @@ public class Main  {
         HistoricalProductionParser historicalProductionParser = applicationContext.getBean(HistoricalProductionParser.class);
         CustAndDCProductService custAndDCProductService = applicationContext.getBean(CustAndDCProductServiceImpl.class);
         NEparser nEparser = applicationContext.getBean(NEparser.class);
-//        customersParser.initData(f);
-//        customersParser.parse();
-//        //customersParser.parseExternal();
-//        customersParser.getPostgree();
-//       locationParser.setFileName(f);
-//        locationParser.initPrevData();
-//        locationParser.initData();
-//        locationParser.getPostgree();
-//        productParser.setFileName(f);
-//        productParser.initPrevData();
-//        productParser.parser();
-//        historicalDemandParser.setFileName(f);
-//        historicalDemandParser.initPrevData();
-//        try {
-//            historicalDemandParser.parser();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        historicalProductionParser.setFileNameHP(f);
-//        historicalProductionParser.initPrevDataHP();
-//        try {
-//            historicalProductionParser.parse();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        SIMparser siMparser = applicationContext.getBean(SIMparser.class);
+        SaleService saleService = applicationContext.getBean(SaleServiceImpl.class);
 
-      //  historicalDemandParser.createDemand();
-      //  historicalDemandParser.createHistoricDemand(f);
-
-       // historicalDemandParser.createListCountForAllPeriod();
-       // custAndDCProductService.save();
-        //historicalDemandParser.cloneTable();
-       nEparser.setFilename(f);
-       nEparser.initPrevData();
-       nEparser.parserSS();
-       // historicalProductionParser.parseBom();
-      //  historicalDemandParser.update();
-       // historicalDemandParser.delete();
-//        historicalDemandParser.newSave();
-     //   historicalDemandParser.updateTR(f);
+        saleService.save(f[0]);
+//        siMparser.setFileName(f[0]);
+//        siMparser.parseProductFlowsFromTXT();
     }
 
     public static void main(String[] args){
         SpringApplication.run(Main.class, args);
-//        Main main = new Main();
-//        for(String file : args)
-//        main.printList(file);
+        Main main = new Main();
+        main.printList(args[0]);
 
     }
 

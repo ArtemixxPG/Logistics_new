@@ -1,5 +1,6 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
 import logistics.entityes.Locations;
 
 import javax.persistence.*;
@@ -16,22 +17,32 @@ public class DCsAndFactories implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @CsvBindByName(column = "Name")
     private String name;
 
     @Column(name = "type")
+    @CsvBindByName(column = "Type")
     private String type;
 
     @Column(name = "initially_open")
+    @CsvBindByName(column = "Initially Open")
     private Double initially_open;
 
-    @Column(name = "capcity")
+    @Column(name = "capacity")
+    @CsvBindByName(column = "Capacity")
     private Double capacity;
 
     @Column(name = "capacity_unit")
+    @CsvBindByName(column = "Capacity Unit")
     private String capacity_unit;
 
     @Column(name = "aggregate_orders_by_location")
+    @CsvBindByName(column = "Aggregate Orders By Location")
     private Double aggOrByLoc;
+
+    @Transient
+    @CsvBindByName(column = "Location")
+    private String locationName;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location", referencedColumnName = "name")

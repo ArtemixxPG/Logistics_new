@@ -1,4 +1,4 @@
-package logistics.DAO.result;
+package logistics.DAO.result.all;
 
 import logistics.entityes.SiteState;
 import org.springframework.data.jpa.repository.JpaRepository;

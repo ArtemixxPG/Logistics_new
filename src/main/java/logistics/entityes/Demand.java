@@ -1,6 +1,8 @@
 package logistics.entityes;
 
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,12 +32,42 @@ public class Demand {
     private String id_demand;
 
     @Column(name = "revenue")
+    @CsvBindByName(column = "Revenue")
     private Long revenue;
 
     @Column(name = "currency")
-    private String curency;
+    @CsvBindByName(column = "")
+    private String currency;
+
+    @Transient
+    @CsvBindByName(column = "Customers")
+    private String customersName;
+
+    @Transient
+    @CsvBindByName(column = "Product")
+    private String productName;
 
     public Demand(){}
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCustomersName() {
+        return customersName;
+    }
+
+    public void setCustomersName(String customersName) {
+        this.customersName = customersName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public Long getId() {
         return id;
@@ -65,12 +97,12 @@ public class Demand {
         this.revenue = revenue;
     }
 
-    public String getCurency() {
-        return curency;
+    public String getCurrency() {
+        return currency;
     }
 
-    public void setCurency(String curency) {
-        this.curency = curency;
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public void setId_demand(String id_demand) {

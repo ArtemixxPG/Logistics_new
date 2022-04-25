@@ -1,5 +1,7 @@
 package logistics.entityes;
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 import java.sql.Time;
 
@@ -12,6 +14,11 @@ public class HistoricDemand {
     @Column(name = "id")
     private Long id;
 
+    @Transient
+    @CsvBindByName(column = "Period")
+    private String periodName;
+
+
     @OneToOne
     @JoinColumn(name = "id_demand", referencedColumnName = "id_demand")
     private Demand demand;
@@ -21,6 +28,7 @@ public class HistoricDemand {
     private TimePeriod timePeriod;
 
     @Column(name = "count")
+    @CsvBindByName(column = "Count")
     private Long count;
 
     public HistoricDemand(){}

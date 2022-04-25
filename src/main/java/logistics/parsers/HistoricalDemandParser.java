@@ -2,14 +2,10 @@ package logistics.parsers;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-import logistics.DAO.HistoricDemandDAO;
-import logistics.entityes.HistoricDemand;
 import logistics.entityes.HistoricalDemand;
 import logistics.services.*;
 import org.springframework.stereotype.Component;
-import sun.font.DelegatingShape;
 
-import java.awt.*;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -1,13 +1,12 @@
 package logistics.services.results;
 
-import logistics.DAO.result.NEDAO;
+import logistics.DAO.result.all.NEDAO;
 import logistics.diagrams.NEDiagrams;
 import logistics.diagrams.namedExpressions.*;
 import logistics.entityes.results.NamedExpression;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.net.DatagramPacket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

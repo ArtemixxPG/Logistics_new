@@ -1,6 +1,6 @@
 package logistics.services;
 
-import logistics.DAO.TimePeriodDAO;
+import logistics.DAO.main.TimePeriodDAO;
 import logistics.entityes.TimePeriod;
 import org.springframework.stereotype.Service;
 

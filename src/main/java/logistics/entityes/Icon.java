@@ -1,6 +1,8 @@
 package logistics.entityes;
 
 
+import com.opencsv.bean.CsvBindByName;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,18 +15,23 @@ public class Icon {
     private Long id;
 
     @Column(name = "facility_type")
+    @CsvBindByName(column = "Facility")
     private String facility;
 
     @Column(name = "is_delault")
+    @CsvBindByName(column = "Is Default")
     private boolean flag;
 
     @Column(name = "original_icon")
+    @CsvBindByName(column = "Original Icon")
     private String originalUrl;
 
     @Column(name = "one_and_half_icon")
+    @CsvBindByName(column = "One and half icon")
     private String oneHalfUrl;
 
     @Column(name = "twice_icon")
+    @CsvBindByName(column = "Twice icon")
     private String twiceIcon;
 
     public Icon(){}

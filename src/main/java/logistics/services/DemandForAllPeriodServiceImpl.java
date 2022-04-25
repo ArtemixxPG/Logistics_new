@@ -1,9 +1,9 @@
 package logistics.services;
 
-import logistics.DAO.DemandForAllPeriodDAO;
-import logistics.DAO.HistoricalDemandDAO;
-import logistics.DAO.ProductDAO;
-import logistics.DAO.TimePeriodDAO;
+import logistics.DAO.main.DemandForAllPeriodDAO;
+import logistics.DAO.main.HistoricalDemandDAO;
+import logistics.DAO.main.ProductDAO;
+import logistics.DAO.main.TimePeriodDAO;
 import logistics.entityes.Customers;
 import logistics.entityes.DemandForAllPeriod;
 import logistics.entityes.Products;
