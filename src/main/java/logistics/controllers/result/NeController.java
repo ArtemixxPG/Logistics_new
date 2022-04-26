@@ -28,7 +28,7 @@ public class NeController {
     @GetMapping
     @CrossOrigin
     @JsonView(View.Public.class)
-    public List<NamedExpression> getByIteration(@RequestParam(name = "iteration")int iteration){
+    public List<NamedExpression> getByIteration(@RequestParam(name = "iteration")int iteration) {
         return neService.getByIteration(iteration);
     }
 

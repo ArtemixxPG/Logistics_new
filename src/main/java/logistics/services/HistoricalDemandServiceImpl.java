@@ -1,6 +1,6 @@
 package logistics.services;
 
-import logistics.DAO.main.CustomersDao;
+import logistics.DAO.main.CustomersDAO;
 import logistics.DAO.main.HistoricalDemandDAO;
 import logistics.DAO.main.ProductDAO;
 import logistics.entityes.Customers;
@@ -18,12 +18,12 @@ public class HistoricalDemandServiceImpl implements HistoricalDemandService {
 
     private HistoricalDemandDAO historicalDemandDAO;
     private ProductDAO productDAO;
-    private CustomersDao customersDao;
+    private CustomersDAO customersDao;
 
     private String prevNameCust = "";
 
     public HistoricalDemandServiceImpl(HistoricalDemandDAO historicalDemandDAO, ProductDAO productDAO,
-                                       CustomersDao customersDao) {
+                                       CustomersDAO customersDao) {
         this.historicalDemandDAO = historicalDemandDAO;
         this.productDAO = productDAO;
         this.customersDao = customersDao;

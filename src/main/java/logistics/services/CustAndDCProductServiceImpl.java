@@ -1,7 +1,7 @@
 package logistics.services;
 
 import logistics.DAO.main.CustAndDCProductDAO;
-import logistics.DAO.main.CustomersDao;
+import logistics.DAO.main.CustomersDAO;
 import logistics.DAO.main.DC_FactoriesDAO;
 import logistics.DAO.main.HistoricalProductionDAO;
 import logistics.entityes.*;
@@ -16,13 +16,13 @@ import javax.transaction.Transactional;
 public class CustAndDCProductServiceImpl implements CustAndDCProductService{
 
     private CustAndDCProductDAO custAndDCProductDAO;
-    private CustomersDao customersDao;
+    private CustomersDAO customersDao;
     private DC_FactoriesDAO dc_factoriesDAO;
     private HistoricalProductionDAO historicalProductionDAO;
 
 
 
-    public CustAndDCProductServiceImpl(CustAndDCProductDAO custAndDCProductDAO, CustomersDao customersDao,
+    public CustAndDCProductServiceImpl(CustAndDCProductDAO custAndDCProductDAO, CustomersDAO customersDao,
                                        DC_FactoriesDAO dc_factoriesDAO, HistoricalProductionDAO historicalProductionDAO){
 
         this.custAndDCProductDAO = custAndDCProductDAO;

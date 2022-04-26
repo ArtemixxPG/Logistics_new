@@ -42,7 +42,6 @@ public class Customers implements Serializable {
     @CsvBindByName(column = "Historical Demand")
     private String historicalDemandName;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "icon", referencedColumnName = "id")
     private Icon icon;

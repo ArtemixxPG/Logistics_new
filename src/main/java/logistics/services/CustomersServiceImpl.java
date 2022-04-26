@@ -1,6 +1,6 @@
 package logistics.services;
 
-import logistics.DAO.main.CustomersDao;
+import logistics.DAO.main.CustomersDAO;
 import logistics.DAO.main.LocationsDAO;
 import logistics.entityes.Customers;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ import java.util.List;
 public class CustomersServiceImpl implements CustomersService{
 
 
-    private CustomersDao customersDao;
+    private CustomersDAO customersDao;
     private LocationsDAO locationsDAO;
 
 
-    public CustomersServiceImpl(CustomersDao customersDao, LocationsDAO locationsDAO){
+    public CustomersServiceImpl(CustomersDAO customersDao, LocationsDAO locationsDAO){
         this.customersDao = customersDao;
         this.locationsDAO = locationsDAO;
 

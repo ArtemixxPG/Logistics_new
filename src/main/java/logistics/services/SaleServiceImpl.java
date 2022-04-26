@@ -1,8 +1,6 @@
 package logistics.services;
 
 import logistics.DAO.main.*;
-import logistics.entityes.Demand;
-import logistics.entityes.HistoricDemand;
 import logistics.entityes.HistoricSale;
 import logistics.entityes.Sale;
 import logistics.initialization.InitCSV;
@@ -27,7 +25,7 @@ public class SaleServiceImpl implements SaleService{
     private long id;
 
     public SaleServiceImpl(SaleDAO saleDAO, HistoricSaleDAO historicSaleDAO,
-                           TimePeriodDAO timePeriodDAO, ProductDAO productDAO, CustomersDao customerDao){
+                           TimePeriodDAO timePeriodDAO, ProductDAO productDAO, CustomersDAO customerDao){
         this.saleDAO = saleDAO;
         this.historicSaleDAO = historicSaleDAO;
 
