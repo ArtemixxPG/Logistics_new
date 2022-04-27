@@ -44,6 +44,10 @@ public class DCsAndFactories implements Serializable {
     @CsvBindByName(column = "Location")
     private String locationName;
 
+    @Transient
+    @CsvBindByName(column = "Type")
+    private String typeName;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location", referencedColumnName = "name")
     private Locations locations;

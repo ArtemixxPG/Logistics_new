@@ -4,6 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 import logistics.entityes.HistoricalDemand;
 import logistics.entityes.Icon;
 import logistics.entityes.Locations;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "customers")
+@Data
 public class Customers implements Serializable {
 
     @Id
@@ -58,59 +60,5 @@ public class Customers implements Serializable {
 
     public Customers(){}
 
-    public HistoricalDemand getHistoricalDemand() {
-        return historicalDemand;
-    }
 
-    public void setHistoricalDemand(HistoricalDemand historicalDemand) {
-        this.historicalDemand = historicalDemand;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Icon getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Icon icon) {
-        this.icon = icon;
-    }
-
-    public String getInclusion() {
-        return inclusion;
-    }
-
-    public void setInclusion(String inclusion) {
-        this.inclusion = inclusion;
-    }
-
-    public Locations getLocation() {
-        return locations;
-    }
-
-    public void setLocation(Locations locations) {
-        this.locations = locations;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

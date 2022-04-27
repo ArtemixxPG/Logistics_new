@@ -33,19 +33,19 @@ public class UploadCSVServiceImpl implements UploadCSVService{
     private SuppliersDAO suppliersDAO;
 
 
-    public UploadCSVServiceImpl(TimePeriodDAO timePeriodDAO) {
+    public UploadCSVServiceImpl(TimePeriodDAO timePeriodDAO, CustomersDAO customersDAO,
+                                DC_FactoriesDAO dc_factoriesDAO, DemandDAO demandDAO, SuppliersDAO suppliersDAO,
+                                LocationsDAO locationsDAO, ProductDAO productDAO, SaleDAO saleDAO) {
         this.timePeriodDAO = timePeriodDAO;
+        this.customersDAO = customersDAO;
+        this.dc_factoriesDAO = dc_factoriesDAO;
+        this.demandDAO = demandDAO;
+        this.locationsDAO = locationsDAO;
+        this.productDAO = productDAO;
+        this.saleDAO = saleDAO;
+        this.suppliersDAO = suppliersDAO;
     }
-    //public UploadCSVServiceImpl(CustAndDCProductDAO custAndDCProductDAO) { this.custAndDCProductDAO = custAndDCProductDAO; }
-    public UploadCSVServiceImpl(CustomersDAO customersDAO) { this.customersDAO = customersDAO; }
-    public UploadCSVServiceImpl(DC_FactoriesDAO dc_factoriesDAO) { this.dc_factoriesDAO = dc_factoriesDAO; }
-    public UploadCSVServiceImpl(DemandDAO demandDAO) { this.demandDAO = demandDAO; }
-    //public UploadCSVServiceImpl(HistoricalDemandDAO historicalDemandDAO) { this.historicalDemandDAO = historicalDemandDAO; }
-    //public UploadCSVServiceImpl(HistoricalProductionDAO historicalProductionDAO) { this.historicalProductionDAO = historicalProductionDAO; }
-    public UploadCSVServiceImpl(LocationsDAO locationsDAO) { this.locationsDAO = locationsDAO; }
-    public UploadCSVServiceImpl(ProductDAO productDAO) { this.productDAO = productDAO; }
-    public UploadCSVServiceImpl(SaleDAO saleDAO) { this.saleDAO = saleDAO; }
-    public UploadCSVServiceImpl(SuppliersDAO suppliersDAO) { this.suppliersDAO = suppliersDAO; }
+
 
 
     @Override
@@ -54,7 +54,8 @@ public class UploadCSVServiceImpl implements UploadCSVService{
             System.out.println("");
             System.out.println("Please select a CSV file to upload.");
         } else {
-            if (file.getOriginalFilename().contains("periods.csv")) {
+            //Вынести проверку на csv вверх, после проверки на заполненность файла, оставить только так, как в первом
+            if (file.getOriginalFilename().contains("periods")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<TimePeriod> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(TimePeriod.class)
@@ -75,6 +76,13 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<Customers> customers = csvToBean.parse();
+                    //По этому принципу обновить locations и name у Suppliers(sup) и DC()
+                    for(Customers customer : customers){
+                        Locations location = locationsDAO.getLocationsByName(customer.getLocationName());
+                        customer.setLocations(location);
+                        customer.setName("cust_" + customer.getName());
+                    }
+
                     customersDAO.saveAll(customers);
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
