@@ -2,6 +2,7 @@ package logistics.entityes;
 
 import com.opencsv.bean.CsvBindByName;
 import logistics.entityes.Locations;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "dcs_and_factories")
+@Data
 public class DCsAndFactories implements Serializable {
 
     @Id
@@ -41,7 +43,7 @@ public class DCsAndFactories implements Serializable {
     private Double aggOrByLoc;
 
     @Transient
-    @CsvBindByName(column = "Location")
+    @CsvBindByName(column = "locations")
     private String locationName;
 
     @Transient
@@ -145,4 +147,7 @@ public class DCsAndFactories implements Serializable {
     public void setCapacity_unit(String capacity_unit) {
         this.capacity_unit = capacity_unit;
     }
+
+
 }
+

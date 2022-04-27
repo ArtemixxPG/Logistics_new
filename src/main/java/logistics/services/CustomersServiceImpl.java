@@ -26,7 +26,7 @@ public class CustomersServiceImpl implements CustomersService{
 
     @Override
     public Long save(Customers customers) {
-        customers.setLocation(locationsDAO.getLocationsByName(customers.getName().split("_")[1]));
+        customers.setLocations(locationsDAO.getLocationsByName(customers.getName().split("_")[1]));
      //   locationsDAO.updateCustomers(customers, customers.getName());
         if (customersDao.getCustomersByName(customers.getName()) == null) {
             return customersDao.save(customers).getId();
@@ -40,7 +40,7 @@ public class CustomersServiceImpl implements CustomersService{
         newCustomers.setIcon(customers.getIcon());
         newCustomers.setInclusion(customers.getInclusion());
         newCustomers.setName(customers.getName());
-        newCustomers.setLocation(customers.getLocation());
+        newCustomers.setLocations(customers.getLocations());
         newCustomers.setType(customers.getType());
         return customersDao.save(customers).getId();
     }

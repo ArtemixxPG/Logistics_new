@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ByteArrayInputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
@@ -20,13 +21,10 @@ public class UploadCSVServiceImpl implements UploadCSVService{
 
 
     private TimePeriodDAO timePeriodDAO;
-
-    //private CustAndDCProductDAO custAndDCProductDAO;
+    private BOMDAO bomDAO;
     private CustomersDAO customersDAO;
     private DC_FactoriesDAO dc_factoriesDAO;
     private DemandDAO demandDAO;
-    //private HistoricalDemandDAO historicalDemandDAO;
-    //private HistoricalProductionDAO historicalProductionDAO;
     private LocationsDAO locationsDAO;
     private ProductDAO productDAO;
     private SaleDAO saleDAO;
@@ -35,7 +33,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
 
     public UploadCSVServiceImpl(TimePeriodDAO timePeriodDAO, CustomersDAO customersDAO,
                                 DC_FactoriesDAO dc_factoriesDAO, DemandDAO demandDAO, SuppliersDAO suppliersDAO,
-                                LocationsDAO locationsDAO, ProductDAO productDAO, SaleDAO saleDAO) {
+                                LocationsDAO locationsDAO, ProductDAO productDAO, SaleDAO saleDAO, BOMDAO bomDAO) {
         this.timePeriodDAO = timePeriodDAO;
         this.customersDAO = customersDAO;
         this.dc_factoriesDAO = dc_factoriesDAO;
@@ -44,6 +42,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
         this.productDAO = productDAO;
         this.saleDAO = saleDAO;
         this.suppliersDAO = suppliersDAO;
+        this.bomDAO = bomDAO;
     }
 
 
@@ -53,7 +52,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
         if (file.isEmpty()) {
             System.out.println("");
             System.out.println("Please select a CSV file to upload.");
-        } else {
+        } else if (file.getOriginalFilename().contains(".csv")) {
             //Вынести проверку на csv вверх, после проверки на заполненность файла, оставить только так, как в первом
             if (file.getOriginalFilename().contains("periods")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
@@ -69,14 +68,13 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }
-            if (file.getOriginalFilename().contains("customers.csv")) {
+            if (file.getOriginalFilename().contains("customers")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Customers> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Customers.class)
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<Customers> customers = csvToBean.parse();
-                    //По этому принципу обновить locations и name у Suppliers(sup) и DC()
                     for(Customers customer : customers){
                         Locations location = locationsDAO.getLocationsByName(customer.getLocationName());
                         customer.setLocations(location);
@@ -89,20 +87,35 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }
-            if (file.getOriginalFilename().contains("dcs and factories.csv")) {
+            if (file.getOriginalFilename().contains("dcs and factories")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<DCsAndFactories> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(DCsAndFactories.class)
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<DCsAndFactories> dCsAndFactories = csvToBean.parse();
+                    for(DCsAndFactories dCsAndFactory : dCsAndFactories){
+                        Locations location = locationsDAO.getLocationsByName(dCsAndFactory.getLocationName());
+                        dCsAndFactory.setLocations(location);
+                        if (dCsAndFactory.getTypeName().contains("производство")) {
+                            dCsAndFactory.setName("fact_имя" + dCsAndFactory.getName());
+                        }
+                        if (dCsAndFactory.getTypeName().contains("сортировочная станция")) {
+                            dCsAndFactory.setName("fcheck_имя" + dCsAndFactory.getName());
+                        }
+                        if (dCsAndFactory.getTypeName().contains("склад")) {
+                            dCsAndFactory.setName("dc_имя" + dCsAndFactory.getName());
+                        }
+                    }
+
                     dc_factoriesDAO.saveAll(dCsAndFactories);
+
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
                     e.printStackTrace();
                 }
             }
-            if (file.getOriginalFilename().contains("demand.csv")) {
+            if (file.getOriginalFilename().contains("demand")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Demand> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Demand.class)
@@ -110,6 +123,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                             .build();
                     List<Demand> demands = csvToBean.parse();
                     demandDAO.saveAll(demands);
+
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
                     e.printStackTrace();
@@ -141,7 +155,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }*/
-            if (file.getOriginalFilename().contains("locations.csv")) {
+            if (file.getOriginalFilename().contains("locations")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Locations> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Locations.class)
@@ -154,7 +168,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }
-            if (file.getOriginalFilename().contains("products.csv")) {
+            if (file.getOriginalFilename().contains("products")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Products> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Products.class)
@@ -180,7 +194,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }*/
-            if (file.getOriginalFilename().contains("sale.csv")) {
+            if (file.getOriginalFilename().contains("sale")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Sale> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Sale.class)
@@ -193,14 +207,33 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                     e.printStackTrace();
                 }
             }
-            if (file.getOriginalFilename().contains("suppliers.csv")) {
+            if (file.getOriginalFilename().contains("suppliers")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Suppliers> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Suppliers.class)
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<Suppliers> suppliers = csvToBean.parse();
+                    for(Suppliers supplier : suppliers){
+                        Locations location = locationsDAO.getLocationsByName(supplier.getLocationsName());
+                        supplier.setLocations(location);
+                        supplier.setName("sup_" + supplier.getName());
+                    }
+
                     suppliersDAO.saveAll(suppliers);
+                } catch (IOException e) {
+                    System.out.println("An error occurred while processing the CSV file.");
+                    e.printStackTrace();
+                }
+            }
+            if (file.getOriginalFilename().contains("bom")) {
+                try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+                    CsvToBean<BOM> csvToBean = new CsvToBeanBuilder(reader)
+                            .withType(BOM.class)
+                            .withIgnoreLeadingWhiteSpace(true)
+                            .build();
+                    List<BOM> bom = csvToBean.parse();
+                    bomDAO.saveAll(bom);
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
                     e.printStackTrace();

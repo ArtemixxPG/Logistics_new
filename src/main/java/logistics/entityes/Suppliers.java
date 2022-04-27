@@ -5,12 +5,14 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import logistics.entityes.Locations;
 import logistics.entityes.Participant;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "suppliers")
+@Data
 public class Suppliers extends Participant {
 
     @Id
