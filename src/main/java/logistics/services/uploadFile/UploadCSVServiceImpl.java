@@ -21,12 +21,12 @@ public class UploadCSVServiceImpl implements UploadCSVService{
 
     private TimePeriodDAO timePeriodDAO;
 
-    private CustAndDCProductDAO custAndDCProductDAO;
+    //private CustAndDCProductDAO custAndDCProductDAO;
     private CustomersDAO customersDAO;
     private DC_FactoriesDAO dc_factoriesDAO;
     private DemandDAO demandDAO;
-    private HistoricalDemandDAO historicalDemandDAO;
-    private HistoricalProductionDAO historicalProductionDAO;
+    //private HistoricalDemandDAO historicalDemandDAO;
+    //private HistoricalProductionDAO historicalProductionDAO;
     private LocationsDAO locationsDAO;
     private ProductDAO productDAO;
     private SaleDAO saleDAO;
@@ -36,12 +36,12 @@ public class UploadCSVServiceImpl implements UploadCSVService{
     public UploadCSVServiceImpl(TimePeriodDAO timePeriodDAO) {
         this.timePeriodDAO = timePeriodDAO;
     }
-    public UploadCSVServiceImpl(CustAndDCProductDAO custAndDCProductDAO) { this.custAndDCProductDAO = custAndDCProductDAO; }
+    //public UploadCSVServiceImpl(CustAndDCProductDAO custAndDCProductDAO) { this.custAndDCProductDAO = custAndDCProductDAO; }
     public UploadCSVServiceImpl(CustomersDAO customersDAO) { this.customersDAO = customersDAO; }
     public UploadCSVServiceImpl(DC_FactoriesDAO dc_factoriesDAO) { this.dc_factoriesDAO = dc_factoriesDAO; }
     public UploadCSVServiceImpl(DemandDAO demandDAO) { this.demandDAO = demandDAO; }
-    public UploadCSVServiceImpl(HistoricalDemandDAO historicalDemandDAO) { this.historicalDemandDAO = historicalDemandDAO; }
-    public UploadCSVServiceImpl(HistoricalProductionDAO historicalProductionDAO) { this.historicalProductionDAO = historicalProductionDAO; }
+    //public UploadCSVServiceImpl(HistoricalDemandDAO historicalDemandDAO) { this.historicalDemandDAO = historicalDemandDAO; }
+    //public UploadCSVServiceImpl(HistoricalProductionDAO historicalProductionDAO) { this.historicalProductionDAO = historicalProductionDAO; }
     public UploadCSVServiceImpl(LocationsDAO locationsDAO) { this.locationsDAO = locationsDAO; }
     public UploadCSVServiceImpl(ProductDAO productDAO) { this.productDAO = productDAO; }
     public UploadCSVServiceImpl(SaleDAO saleDAO) { this.saleDAO = saleDAO; }
