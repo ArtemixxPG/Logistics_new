@@ -27,8 +27,8 @@ public class NEparser {
     }
 
 
-    public void parser(){
-        for(String line[] :list){
+    public void parser() {
+        for(String line[] :list) {
             NamedExpression namedExpression = new NamedExpression();
             namedExpression.setIteration(Integer.parseInt(line[0]));
             namedExpression.setExpression_name(line[1]);
@@ -41,8 +41,8 @@ public class NEparser {
         }
     }
 
-    public void parserSS(){
-        for(String line[] : list){
+    public void parserSS() {
+        for(String line[] : list) {
             SiteState siteState = new SiteState();
             siteState.setIteration(Long.parseLong(line[0]));
             siteState.setTimePeriod(line[1]);
@@ -55,7 +55,7 @@ public class NEparser {
         }
     }
 
-    public void initPrevData(){
+    public void initPrevData() {
         Reader reader = null;
         try {
             try {

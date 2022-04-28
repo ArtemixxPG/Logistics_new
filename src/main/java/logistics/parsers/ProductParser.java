@@ -25,22 +25,22 @@ public class ProductParser {
         this.productService = productService;
         this.list = new ArrayList<>();
 
-
     }
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    public void parser(){
-        for(String[] product: list){
+    public void parser() {
+        for(String[] product: list) {
             Products products = new Products();
             products.setName(product[1]);
             productService.save(products);
+
         }
     }
 
-    public void initPrevData(){
+    public void initPrevData() {
         Reader reader = null;
         try {
             try {
@@ -54,9 +54,7 @@ public class ProductParser {
         CSVReader csvReader = new CSVReader(reader);
         try {
             list = csvReader.readAll();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (CsvException e) {
+        } catch (IOException | CsvException e) {
             e.printStackTrace();
         }
         try {
@@ -68,7 +66,6 @@ public class ProductParser {
         }
 
         list.remove(0);
-
 
     }
 }

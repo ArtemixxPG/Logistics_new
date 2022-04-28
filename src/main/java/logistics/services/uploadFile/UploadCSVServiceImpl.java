@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UploadCSVServiceImpl implements UploadCSVService{
+public class UploadCSVServiceImpl implements UploadCSVService {
 
 
     private TimePeriodDAO timePeriodDAO;
@@ -53,7 +53,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
             System.out.println("");
             System.out.println("Please select a CSV file to upload.");
         } else if (file.getOriginalFilename().contains(".csv")) {
-            //Вынести проверку на csv вверх, после проверки на заполненность файла, оставить только так, как в первом
+
             if (file.getOriginalFilename().contains("periods")) {
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<TimePeriod> csvToBean = new CsvToBeanBuilder(reader)
@@ -75,13 +75,14 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<Customers> customers = csvToBean.parse();
-                    for(Customers customer : customers){
+                    for(Customers customer : customers) {
                         Locations location = locationsDAO.getLocationsByName(customer.getLocationName());
                         customer.setLocations(location);
                         customer.setName("cust_" + customer.getName());
                     }
 
                     customersDAO.saveAll(customers);
+
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
                     e.printStackTrace();
@@ -98,13 +99,13 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                         Locations location = locationsDAO.getLocationsByName(dCsAndFactory.getLocationName());
                         dCsAndFactory.setLocations(location);
                         if (dCsAndFactory.getTypeName().contains("производство")) {
-                            dCsAndFactory.setName("fact_имя" + dCsAndFactory.getName());
+                            dCsAndFactory.setName("fact_" + dCsAndFactory.getName());
                         }
                         if (dCsAndFactory.getTypeName().contains("сортировочная станция")) {
-                            dCsAndFactory.setName("fcheck_имя" + dCsAndFactory.getName());
+                            dCsAndFactory.setName("fcheck_" + dCsAndFactory.getName());
                         }
                         if (dCsAndFactory.getTypeName().contains("склад")) {
-                            dCsAndFactory.setName("dc_имя" + dCsAndFactory.getName());
+                            dCsAndFactory.setName("dc_" + dCsAndFactory.getName());
                         }
                     }
 
@@ -116,6 +117,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                 }
             }
             if (file.getOriginalFilename().contains("demand")) {
+
                 try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
                     CsvToBean<Demand> csvToBean = new CsvToBeanBuilder(reader)
                             .withType(Demand.class)
@@ -123,7 +125,6 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                             .build();
                     List<Demand> demands = csvToBean.parse();
                     demandDAO.saveAll(demands);
-
                 } catch (IOException e) {
                     System.out.println("An error occurred while processing the CSV file.");
                     e.printStackTrace();
@@ -214,7 +215,7 @@ public class UploadCSVServiceImpl implements UploadCSVService{
                             .withIgnoreLeadingWhiteSpace(true)
                             .build();
                     List<Suppliers> suppliers = csvToBean.parse();
-                    for(Suppliers supplier : suppliers){
+                    for(Suppliers supplier : suppliers) {
                         Locations location = locationsDAO.getLocationsByName(supplier.getLocationsName());
                         supplier.setLocations(location);
                         supplier.setName("sup_" + supplier.getName());

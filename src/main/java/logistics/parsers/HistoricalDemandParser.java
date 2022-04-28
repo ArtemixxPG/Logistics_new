@@ -22,25 +22,19 @@ public class HistoricalDemandParser {
     private DemandForAllPeriodService demandForAllPeriodService;
     private HistoricalDemandWRDService historicalDemandWRDService;
     private HistoricDemandService historicDemandService;
-
     private DemandService demandService;
-
     private List<String[]> list;
-
-
-
     private String fileName;
 
     public HistoricalDemandParser(HistoricalDemandService historicalDemandService,
                                   DemandForAllPeriodService demandForAllPeriodService,
                                   HistoricalDemandWRDService historicalDemandWRDService,
-                                  DemandService demandService, HistoricDemandService historicDemandService){
+                                  DemandService demandService, HistoricDemandService historicDemandService) {
         this.historicalDemandService = historicalDemandService;
         this.demandForAllPeriodService = demandForAllPeriodService;
         this.historicalDemandWRDService = historicalDemandWRDService;
         this.demandService = demandService;
         this.historicDemandService = historicDemandService;
-
         this.list = new ArrayList<>();
     }
 
@@ -51,11 +45,9 @@ public class HistoricalDemandParser {
     private int prevCount = 0;
     private HistoricalDemand historicalDemand = null;
 
-
     public void createDemand(){
         demandService.save();
     }
-
 
     public void cloneTable(){
         historicalDemandWRDService.save();
@@ -84,7 +76,7 @@ public class HistoricalDemandParser {
 
         String prevPeriod = "";
         List<Map<String, String>> hdS = new ArrayList<>();
-        while (list.size()>0){
+        while (list.size()>0) {
 
             String custName = list.get(0)[4];
             String dateTime = list.get(0)[6];
@@ -102,58 +94,58 @@ public class HistoricalDemandParser {
 
             parametrs.put("cust", custName);
             parametrs.put("dateTime", dateTime);
-            if(product.contains("пара колесная") ||product.contains("Пара колесная")){
-                if(product.contains("Новая")){
+            if(product.contains("пара колесная") || product.contains("Пара колесная")) {
+                if(product.contains("Новая")) {
                     productName = "Новая ось пары колесной";
                 } else if(!product.contains("СОСК")&&!product.contains("СОНК")&&!product.contains("НОСК")
-                &&!product.contains("НОНД")){
-                    productName = "БУ_"+list.get(0)[3].split(" ")[0] + " пара колесная обод " + gradation;
-                } else if(product.contains("СОСК")){
+                &&!product.contains("НОНД")) {
+                    productName = "БУ_"+ list.get(0)[3].split(" ")[0] + " пара колесная обод " + gradation;
+                } else if(product.contains("СОСК")) {
                     productName = "СОСК_"+list.get(0)[3] + " пара колесная обод " + gradation;
                 }
-                else if(product.contains("НОСК")){
+                else if(product.contains("НОСК")) {
                     productName = "НОСК_"+list.get(0)[3] + " пара колесная обод " + gradation;
                 }
-                else if(product.contains("НОНД")){
+                else if(product.contains("НОНД")) {
                         productName = "Пара колесная " + "НОНК " + product.split(" ")[product.split(" ").length - 1];
 
                 }
-                else if(product.contains("СОНК")){
+                else if(product.contains("СОНК")) {
                     productName = "Пара колесная СОНК";
                 }
             }
 
             if(product.contains("балка надрессорная") || product.contains("рама боковая") ||
-                    product.contains("Балка надрессорная") || product.contains("Рама боковая")){
-                if(product.contains("Новая")){
-                    if(product.contains("балка надрессорная") || product.contains("Балка надрессорная")){
+                    product.contains("Балка надрессорная") || product.contains("Рама боковая")) {
+                if(product.contains("Новая")) {
+                    if(product.contains("балка надрессорная") || product.contains("Балка надрессорная")) {
                         productName = "Новая балка надрессорная";
                     } else {
                         productName = "Новая рама боковая";
                     }
-                } else if(product.contains("балка надрессорная") || product.contains("Балка надрессорная")){
+                } else if(product.contains("балка надрессорная") || product.contains("Балка надрессорная")) {
                     productName = "БУ_"+list.get(0)[3] + " балка надрессорная срок эксплуатации " + gradation;
                 } else {
                     productName = "БУ_"+list.get(0)[3] + " рама боковая срок эксплуатации " + gradation;
                 }
             }
 
-            if(product.contains("Аппарат") || product.contains("аппарат")){
-                if(product.contains("Новая")){
+            if(product.contains("Аппарат") || product.contains("аппарат")) {
+                if(product.contains("Новая")) {
                         productName = "Новый поглощающий аппарат";
-                } else if(list.get(0)[3].equals("ОД")){
+                } else if(list.get(0)[3].equals("ОД")) {
                     productName = "Поглощающий аппарат ОД";
-                } else if(list.get(0)[3].equals("РД")){
+                } else if(list.get(0)[3].equals("РД")) {
                     productName = "Поглощающий аппарат РД";
                 }
             }
-            if(product.contains("ЦКК")){
+            if(product.contains("ЦКК")) {
                 productName = "Новый диск пары колесной (ЦКК)";
             }
 
 
             int count = 0;
-            for(String[] newl1: newL){
+            for(String[] newl1: newL) {
                 if(!newl1[8].equals("")) {
                     count += Integer.parseInt(newl1[8]);
                 }
@@ -173,11 +165,9 @@ public class HistoricalDemandParser {
                 historicalDemand.setPrice(Long.parseLong(list.get(0)[10].split(" ")[0] + list.get(0)[10].split(" ")[1]));
             }
 
-
             historicalDemandService.save(historicalDemand, productName, custName, list.get(0)[5], fileWriter);
 
             list.removeAll(newL);
-
 
         }
 
@@ -302,7 +292,7 @@ public class HistoricalDemandParser {
         historicDemandService.save(fileName);
     }
 
-    public void initPrevData(){
+    public void initPrevData() {
         Reader reader = null;
         try {
             try {
@@ -331,8 +321,5 @@ public class HistoricalDemandParser {
 
         list.remove(0);
 
-
-
     }
-
 }

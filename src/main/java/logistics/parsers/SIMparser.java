@@ -18,13 +18,13 @@ public class SIMparser {
 
     private SIMResultService sIMResultService;
 
-    private SIMparser(SIMResultService sIMResultService){
+    private SIMparser(SIMResultService sIMResultService) {
         this.sIMResultService = sIMResultService;
     }
 
-    public void parseTotalCost(){
+    public void parseTotalCost() {
         initCSV = InitCSV.init(fileName);
-        for(String[] line:initCSV.getList()){
+        for(String[] line:initCSV.getList()) {
             TotalCost cost = new TotalCost();
             cost.setStatistics(line[0]);
             cost.setType(line[1]);
@@ -57,9 +57,9 @@ public class SIMparser {
         }
     }
 
-    public void parseShipmentShedule(){
+    public void parseShipmentShedule() {
         initCSV = InitCSV.init(fileName);
-        for(String[] line:initCSV.getList()){
+        for(String[] line:initCSV.getList()) {
             ShipmentSchedule ss = new ShipmentSchedule();
             ss.setStatistics(line[0]);
             ss.setObject(line[1]);
@@ -82,7 +82,7 @@ public class SIMparser {
                 if((line[12].split(",").length>=2)) {
                     Double value = Double.parseDouble(line[12].split(",")[0]+line[12].split(",")[1]);
                     ss.setQuantity(value);
-                } else if((line[12].split(",").length<2)){
+                } else if((line[12].split(",").length<2)) {
                     Double value = Double.parseDouble(line[12]);
                     ss.setQuantity(value);
                 }
@@ -94,7 +94,7 @@ public class SIMparser {
 
     public void parseProductFlows(){
         initCSV = InitCSV.init(fileName);
-        for(String[] line:initCSV.getList()){
+        for(String[] line : initCSV.getList()){
             ProductFlows productFlows = new ProductFlows();
             productFlows.setStatistics(line[0]);
             productFlows.setObject(line[1]);
@@ -117,9 +117,9 @@ public class SIMparser {
         }
     }
 
-    public void parseProductFlowsFromTXT(){
+    public void parseProductFlowsFromTXT() {
         initTXT = InitTXT.init(fileName);
-        for(String[] line:initTXT.getList()){
+        for(String[] line:initTXT.getList()) {
             ProductFlows productFlows = new ProductFlows();
             productFlows.setStatistics(line[0]);
             productFlows.setObject(line[1]);
@@ -142,7 +142,7 @@ public class SIMparser {
         }
     }
 
-    public void setFileName(String fileName){
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 

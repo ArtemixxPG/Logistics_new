@@ -30,7 +30,6 @@ public class LocationParser {
     public LocationParser(LocationService locationService){
         this.list = new ArrayList<>();
         this.data = new ArrayList<>();
-
         this.locationService = locationService;
 
     }
@@ -61,9 +60,9 @@ public class LocationParser {
 //        }
 //    }
 
-    public void initData(){
-        for(String[] str : list){
-            if(!str[0].equals("")) {
+    public void initData() {
+        for (String[] str : list) {
+            if (!str[0].equals("")) {
                 Locations locations = new Locations();
                 findCode(str, 4, locations);
                 locations.setName(str[0]);
@@ -77,25 +76,23 @@ public class LocationParser {
                 }
             }
             }
-
-
     }
 
-    private void findCode(String[] str, int numAdd, Locations locations){
+    private void findCode(String[] str, int numAdd, Locations locations) {
         String postAddress = str[numAdd];
         String[] parsePostAddress = postAddress.split(",");
 
-        if(parsePostAddress[0].length() == 6){
+        if(parsePostAddress[0].length() == 6) {
             locations.setCode(parsePostAddress[0]);
         } else {
             String[] findCode = parsePostAddress[0].split(" ");
-            if(findCode[0].length() == 6 && Character.isDigit(findCode[0].charAt(0))){
+            if(findCode[0].length() == 6 && Character.isDigit(findCode[0].charAt(0))) {
                 locations.setCode(findCode[0]);
             }
              else {
-                 for(String elem : parsePostAddress){
-                     for (String inElem : elem.split(" ")){
-                         if(inElem.length() == 6 && Character.isDigit(inElem.charAt(0))){
+                 for(String elem : parsePostAddress) {
+                     for (String inElem : elem.split(" ")) {
+                         if(inElem.length() == 6 && Character.isDigit(inElem.charAt(0))) {
                              locations.setCode(inElem);
                          }
                      }
@@ -135,7 +132,6 @@ public class LocationParser {
                     }
                 }
             }
-
         }
     }
 
@@ -169,13 +165,11 @@ public class LocationParser {
                     }
                 }
             }
-
-
     }
 
 
 
-    private void findAdress(String[] str, int numAdd, Locations locations){
+    private void findAdress(String[] str, int numAdd, Locations locations) {
         String postAddress = str[numAdd];
         String[] parsePostAddress = postAddress.split(",");
 
@@ -183,7 +177,7 @@ public class LocationParser {
             String[] name = parsePostAddress[e].split(" ");
             for (int i = 0; i < name.length; i++) {
                 if(name[i].equals("ул.") || name[i].equals("улица") ||
-                        name[i].equals("станция")|| name[i].equals("парк")){
+                        name[i].equals("станция")|| name[i].equals("парк")) {
                     if(name.length == 2){
                         if(e!=parsePostAddress.length - 1) {
                             locations.setAddress(parsePostAddress[e] + parsePostAddress[e + 1]);
@@ -195,7 +189,7 @@ public class LocationParser {
                     }
                     else {
                         if (i != 0) {
-                            if(name[i - 1].equals("")){
+                            if(name[i - 1].equals("")) {
                                 locations.setAddress(name[i] + " " + name[i + 1]);
                                 break;
                             } else {
@@ -212,12 +206,10 @@ public class LocationParser {
                 }
             }
         }
-
-
     }
 
-    private boolean findKorpus(String s){
-        for(int i = 0; i < s.length(); i++){
+    private boolean findKorpus(String s) {
+        for(int i = 0; i < s.length(); i++) {
             if(s.charAt(i) == 'к'){
                 return true;
             }
@@ -225,13 +217,13 @@ public class LocationParser {
         return false;
     }
 
-    public void getPostgree(){
-        for(Locations locations : data){
+    public void getPostgree() {
+        for(Locations locations : data) {
             locationService.save(locations);
         }
     }
 
-    public void initPrevData(){
+    public void initPrevData() {
         Reader reader = null;
         try {
             try {
@@ -257,10 +249,7 @@ public class LocationParser {
             e.printStackTrace();
 
         }
-
             list.remove(0);
-
-
     }
 
     public void setFileName(String fileName) {

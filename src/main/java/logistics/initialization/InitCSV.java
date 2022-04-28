@@ -53,7 +53,6 @@ public class InitCSV {
         list.remove(0);
         list.remove(0);
 
-
     }
 
     public static InitCSV init(String fileName) {

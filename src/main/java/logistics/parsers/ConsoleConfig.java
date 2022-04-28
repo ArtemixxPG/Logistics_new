@@ -22,9 +22,8 @@ import java.util.HashMap;
 @ComponentScan("logistics")
 public class ConsoleConfig {
 
-
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
 
         PGSimpleDataSource pgDataSource = new PGSimpleDataSource();
         pgDataSource.setURL("jdbc:postgresql://localhost:5432/postgres");
@@ -33,7 +32,7 @@ public class ConsoleConfig {
         return pgDataSource;
     }
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HashMap<String, String > hibernatePropertys = new HashMap<>();
         hibernatePropertys.put("hibernate.hbm2ddl.auto","update");
         hibernatePropertys.put("hibernate.connection.driver_class","org.postgresql.Driver");

@@ -5,6 +5,7 @@ import logistics.entityes.Locations;
 import logistics.services.LocationService;
 import logistics.services.LocationServiceImpl;
 import logistics.view.View;
+import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -16,7 +17,7 @@ public class LocationController {
 
     private LocationService locationService;
 
-    public  LocationController(LocationService locationService){
+    public LocationController(LocationService locationService){
         this.locationService = locationService;
     }
 

@@ -9,14 +9,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SiteStateServiceImpl implements SiteStateService{
+public class SiteStateServiceImpl implements SiteStateService {
 
     private SiteStateDAO siteStateDAO;
 
     public SiteStateServiceImpl(SiteStateDAO siteStateDAO){
         this.siteStateDAO = siteStateDAO;
     }
-
 
     @Override
     public Long save(SiteState siteState) {

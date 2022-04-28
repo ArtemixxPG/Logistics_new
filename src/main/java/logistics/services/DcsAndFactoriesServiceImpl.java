@@ -10,12 +10,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DcsAndFactoriesServiceImpl implements DCsAndFactoriesService{
+public class DcsAndFactoriesServiceImpl implements DCsAndFactoriesService {
    private DC_FactoriesDAO dc_factoriesDAO;
    private LocationsDAO locationsDAO;
 
 
-    public DcsAndFactoriesServiceImpl(DC_FactoriesDAO dc_factoriesDAO, LocationsDAO locationsDAO){
+    public DcsAndFactoriesServiceImpl(DC_FactoriesDAO dc_factoriesDAO, LocationsDAO locationsDAO) {
         this.dc_factoriesDAO = dc_factoriesDAO;
         this.locationsDAO = locationsDAO;
 

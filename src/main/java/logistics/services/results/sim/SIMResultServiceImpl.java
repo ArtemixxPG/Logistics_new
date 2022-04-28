@@ -18,20 +18,18 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional
-public class SIMResultServiceImpl implements SIMResultService{
+public class SIMResultServiceImpl implements SIMResultService {
 
 
     private ResultData resultData;
-
     private ShipmentScheduleDAO shipmentScheduleDAO;
     private ProductFlowsDAO productFlowsDAO;
     private TotalCostDAO totalCostDAO;
-
     private double firstValue, secondValue;
 
     public SIMResultServiceImpl(ShipmentScheduleDAO shipmentScheduleDAO,
                                 ProductFlowsDAO productFlowsDAO,
-                                TotalCostDAO totalCostDAO){
+                                TotalCostDAO totalCostDAO) {
         this.shipmentScheduleDAO = shipmentScheduleDAO;
         this.productFlowsDAO = productFlowsDAO;
         this.totalCostDAO = totalCostDAO;
@@ -80,11 +78,10 @@ public class SIMResultServiceImpl implements SIMResultService{
             Object clone = productFlow.clone();
             productFlowsForChart.add((ProductFlows) clone);
         }
-        ;
 
          List<ResultData.DataSet> dataSet = new ArrayList<>();
 
-         while(productFlowsForChart.size() > 0){
+         while(productFlowsForChart.size() > 0) {
              String datetime = productFlowsForChart.get(0).getPeriod();
 
              List<ProductFlows> productFlowsWithCurrentPeriod = productFlowsForChart.stream()
@@ -93,7 +90,7 @@ public class SIMResultServiceImpl implements SIMResultService{
 
              double value = 0;
 
-             for(ProductFlows currentProductFlows : productFlowsWithCurrentPeriod){
+             for(ProductFlows currentProductFlows : productFlowsWithCurrentPeriod) {
                  value += currentProductFlows.getAmount();
              }
 
@@ -127,11 +124,11 @@ public class SIMResultServiceImpl implements SIMResultService{
             Object clone = shipmentSchedule.clone();
             shipmentSchedulesForChart.add((ShipmentSchedule) clone);
         }
-        ;
+
 
         List<ResultData.DataSet> dataSet = new ArrayList<>();
 
-        while(shipmentSchedulesForChart.size() > 0){
+        while(shipmentSchedulesForChart.size() > 0) {
             String datetime = shipmentSchedulesForChart.get(0).getDate();
 
             List<ShipmentSchedule> shipmentSchedulesWithCurrentPeriod = shipmentSchedulesForChart.stream()
@@ -139,8 +136,7 @@ public class SIMResultServiceImpl implements SIMResultService{
                     .collect(toList());
 
 
-
-            for(ShipmentSchedule shipmentSchedule : shipmentSchedulesWithCurrentPeriod){
+            for(ShipmentSchedule shipmentSchedule : shipmentSchedulesWithCurrentPeriod) {
                 firstValue += shipmentSchedule.getQuantity();
                 secondValue += shipmentSchedule.getVehicle_amount();
             }
@@ -150,7 +146,6 @@ public class SIMResultServiceImpl implements SIMResultService{
             currentDataSet.setFirstValue(firstValue);
             currentDataSet.setSecondValue(secondValue);
             currentDataSet.setName(datetime);
-
 
             dataSet.add(currentDataSet);
 
@@ -166,13 +161,13 @@ public class SIMResultServiceImpl implements SIMResultService{
         return resultData;
     }
 
-    public class ResultData<T>{
+    public class ResultData<T> {
 
 
         private List<T> dataTable;
         private List<DataSet> dataSet;
 
-        public ResultData(){}
+        public ResultData() {}
 
         public List<T> getDataTable() {
             return dataTable;
@@ -190,7 +185,7 @@ public class SIMResultServiceImpl implements SIMResultService{
             this.dataSet = dataSet;
         }
 
-        public class DataSet{
+        public class DataSet {
             private String name;
             private Double firstValue;
             private Double secondValue;
@@ -221,7 +216,5 @@ public class SIMResultServiceImpl implements SIMResultService{
                 this.secondValue = value;
             }
         }
-
     }
-
 }

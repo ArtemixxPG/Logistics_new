@@ -74,7 +74,7 @@ public class DCsAndFactories implements Serializable {
 //    @JoinColumn(name = "icon", columnDefinition = "id")
 //    private Icon icon;
 
-    public DCsAndFactories(){}
+    public DCsAndFactories() {}
 
     public Long getId() {
         return id;

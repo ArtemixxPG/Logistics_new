@@ -24,9 +24,7 @@ public class GeneratedDemandKey implements IdentifierGenerator, Configurable {
     }
 
     @Override
-    public Serializable generate(
-            SharedSessionContractImplementor session, Object obj)
-            throws HibernateException {
+    public Serializable generate(SharedSessionContractImplementor session, Object obj) throws HibernateException {
 
         String query = String.format("select %s from %s",
                 session.getEntityPersister(obj.getClass().getName(), obj)

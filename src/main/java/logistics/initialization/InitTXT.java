@@ -28,24 +28,22 @@ public class InitTXT {
             }
             return instance;
         }
-
     }
 
-    private void initData(){
+    private void initData() {
         try {
-        File file = new File(fileName);
+            File file = new File(fileName);
+            FileReader fr = new FileReader(file);
+            BufferedReader reader = new BufferedReader(fr);
 
-        FileReader fr = new FileReader(file);
-        BufferedReader reader = new BufferedReader(fr);
-
-        String line = reader.readLine();
-        while (line != null) {
-            list.add(line.split(";"));
-            line = reader.readLine();
+            String line = reader.readLine();
+            while (line != null) {
+                list.add(line.split(";"));
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
         list.remove(0);
     }
 

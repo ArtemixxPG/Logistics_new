@@ -22,39 +22,32 @@ public class CustomersParser {
     private CustomersService customersService;
     private SuppliersService suppliersService;
     private DCsAndFactoriesService dCsAndFactoriesService;
-
     private LocationService locationService;
-
     private List<String[]> customers;
-
     private List<Customers> fillCustomers;
     private List<Suppliers> fillSuppliers;
     private List<DCsAndFactories> fillDcsAndFactories;
 
 
     public CustomersParser(CustomersService customersService, SuppliersService suppliersService,
-                           DCsAndFactoriesService dCsAndFactoriesService){
+                           DCsAndFactoriesService dCsAndFactoriesService) {
         this.customersService = customersService;
         this.suppliersService = suppliersService;
         this.dCsAndFactoriesService = dCsAndFactoriesService;
-
-
-
         this.customers = new ArrayList<>();
         this.fillCustomers = new ArrayList<>();
         this.fillSuppliers = new ArrayList<>();
         this.fillDcsAndFactories = new ArrayList<>();
     }
-    public void parse(){
-        for(String[] customer : customers){
 
+    public void parse() {
+
+        for(String[] customer : customers) {
             if(!customer[0].equals("")) {
                 Customers customers = new Customers();
                 customers.setName("cust_" + customer[0]);
                 fillCustomers.add(customers);
             }
-
-
 
 
 //            if(!customer[0].equals("")) {
@@ -94,12 +87,11 @@ public class CustomersParser {
         }
     }
 
-    public void getPostgree(){
+    public void getPostgree() {
         for (Customers customers: fillCustomers) {
             customersService.save(customers);
 
         }
-
 
         for (Suppliers suppliers: fillSuppliers) {
             suppliersService.save(suppliers);
@@ -111,7 +103,7 @@ public class CustomersParser {
     }
 
 
-    public void initData(String fileName){
+    public void initData(String fileName) {
         Reader reader = null;
         try {
             try {
@@ -135,9 +127,7 @@ public class CustomersParser {
             csvReader.close();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-
-      //  customers.remove(0);
+        //customers.remove(0);
     }
 }

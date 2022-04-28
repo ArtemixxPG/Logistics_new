@@ -45,8 +45,8 @@ public class HistoricalProductionParser {
     }
 
 
-    public void parsePeruiod(){
-        for(String[] period : list){
+    public void parsePeruiod() {
+        for(String[] period : list) {
             TimePeriod timePeriod = new TimePeriod();
             try {
                 timePeriod.setName(getDate(period[1]));
@@ -59,8 +59,8 @@ public class HistoricalProductionParser {
         }
     }
 
-    public void parseBom(){
-        for(String[] boms: list){
+    public void parseBom() {
+        for(String[] boms: list) {
             BOM bom = new BOM();
             bom.setName(boms[1]);
             bomService.save(bom, boms[2]);
@@ -84,13 +84,11 @@ public class HistoricalProductionParser {
         dates.add("01.05.2021");
         dates.add("01.06.2021");
 
-        for(String[] hp : listHP){
+        for(String[] hp : listHP) {
 
             int  numDates = 0;
 
-
-
-            if(hp[6].equals("Пара колесная СОНК")){
+            if(hp[6].equals("Пара колесная СОНК")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -102,7 +100,7 @@ public class HistoricalProductionParser {
                     numDates++;
                 }
             }
-            if(hp[5].equals("Пара колесная СОНК РВ2Ш")){
+            if(hp[5].equals("Пара колесная СОНК РВ2Ш")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -116,7 +114,7 @@ public class HistoricalProductionParser {
                     numDates++;
                 }
             }
-            if(hp[6].equals("Пара колесная НОНД РД")){
+            if(hp[6].equals("Пара колесная НОНД РД")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -128,7 +126,7 @@ public class HistoricalProductionParser {
                     numDates++;
                 }
             }
-            if(hp[6].equals("Пара колесная НОНД ОД")){
+            if(hp[6].equals("Пара колесная НОНД ОД")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -141,7 +139,7 @@ public class HistoricalProductionParser {
                 }
             }
 
-            if(hp[5].equals("Пара колесная НОСК")){
+            if(hp[5].equals("Пара колесная НОСК")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -155,7 +153,7 @@ public class HistoricalProductionParser {
                     numDates++;
                 }
             }
-            if(hp[5].equals("Пара колесная СОСК")){
+            if(hp[5].equals("Пара колесная СОСК")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -163,13 +161,13 @@ public class HistoricalProductionParser {
                     } else {
                         historicalProduction.setCountProduct(0);
                     }
-                    historicalProductionService.save(historicalProduction, "СОСК_ОД пара колесная обод "+hp[6],
+                    historicalProductionService.save(historicalProduction, "СОСК_ОД пара колесная обод "+ hp[6],
                             hp[3], hp[4], getDate(dates.get(numDates)));
 
                     numDates++;
                 }
             }
-            if(hp[5].equals("Пара колесная ОД")){
+            if(hp[5].equals("Пара колесная ОД")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -183,7 +181,7 @@ public class HistoricalProductionParser {
                     numDates++;
                 }
             }
-            if(hp[5].equals("Рама боковая ОД")){
+            if(hp[5].equals("Рама боковая ОД")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -191,13 +189,13 @@ public class HistoricalProductionParser {
                     } else {
                         historicalProduction.setCountProduct(0);
                     }
-                    historicalProductionService.save(historicalProduction, "БУ_ОД рама боковая срок эксплуатации "+hp[6],
+                    historicalProductionService.save(historicalProduction, "БУ_ОД рама боковая срок эксплуатации "+ hp[6],
                             hp[3], hp[4], getDate(dates.get(numDates)));
 
                     numDates++;
                 }
             }
-            if(hp[5].equals("Балка надрессорная ОД")){
+            if(hp[5].equals("Балка надрессорная ОД")) {
                 for(int i = 13; i<= 24; i++) {
                     HistoricalProduction historicalProduction = new HistoricalProduction();
                     if (!hp[i].equals("")) {
@@ -205,7 +203,7 @@ public class HistoricalProductionParser {
                     } else {
                         historicalProduction.setCountProduct(0);
                     }
-                    historicalProductionService.save(historicalProduction, "БУ_ОД балка надрессорная срок эксплуатации "+hp[6],
+                    historicalProductionService.save(historicalProduction, "БУ_ОД балка надрессорная срок эксплуатации "+ hp[6],
                             hp[3], hp[4], getDate(dates.get(numDates)));
 
                     numDates++;
@@ -248,7 +246,7 @@ public class HistoricalProductionParser {
         historicalProductionService.updateAllBOM();
     }
 
-    public void initPrevData(){
+    public void initPrevData() {
         Reader reader = null;
         try {
             try {
@@ -279,7 +277,7 @@ public class HistoricalProductionParser {
 
 
     }
-    public void initPrevDataHP(){
+    public void initPrevDataHP() {
         Reader reader = null;
         try {
             try {

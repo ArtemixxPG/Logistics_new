@@ -11,8 +11,9 @@ public class SocketServer {
     private ServerSocket serverSocket;
     private Socket client;
 
-    public SocketServer(){
+    public SocketServer() {
         try {
+
             serverSocket = new ServerSocket(server_port);
             client = serverSocket.accept();
 
@@ -20,5 +21,4 @@ public class SocketServer {
             e.printStackTrace();
         }
     }
-
 }

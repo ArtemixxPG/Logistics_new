@@ -50,10 +50,9 @@ public class ParserCSV {
 
             for (CSVRecord csvRecord : csvRecords) {
                 String[] input = new String[headers.length];
-                for(int i = 0; i < input.length; i++){
+                for(int i = 0; i < input.length; i++) {
                     input[i] = csvRecord.get(headers[i]);
                 }
-
                 inputs.add(input);
             }
         } catch (Exception e) {
